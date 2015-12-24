@@ -10,12 +10,12 @@ Like most plugins, you need to download and place a **MineChatAPI** jar in your 
 If you're seeking to hide MineChat connection messages, you'll need to hook into the plugin. 
 See "**Hooking into MineChatAPI**"
 
-Now, with MineChatAPI installed on your server it will start calling the event [**EventMineChatClientJoin**](https://github.com/xMakerx/MineChatAPI/blob/master/src/me/xmx/minechatapi/events/EventMineChatClientJoin.java, "EventMineChatClientJoin.java") when a MineChat
-client joins and a [**EventMineChatClientLeave**](https://github.com/xMakerx/MineChatAPI/blob/master/src/me/xmx/minechatapi/events/EventMineChatClientLeave.java, "EventMineChatClientLeave.java") event when one leaves.
+Now, with MineChatAPI installed on your server it will start calling the event [**MineChatClientJoinEvent**](https://github.com/xMakerx/MineChatAPI/blob/master/src/me/xmx/minechatapi/events/MineChatClientJoinEvent.java, "MineChatClientJoinEvent.java") when a MineChat
+client joins and a [**MineChatClientLeaveEvent**](https://github.com/xMakerx/MineChatAPI/blob/master/src/me/xmx/minechatapi/events/MineChatClientLeaveEvent.java, "MineChatClientLeaveEvent.java") event when one leaves.
 
-For example, we could disconnect all iPhone users by simply listening to **EventMineChatClientJoin**.
+For example, we could disconnect all iPhone users by simply listening to **MineChatClientJoinEvent**.
 ```java
-public void onMineChatClientConnect(final EventMineChatClientJoin evt) {
+public void onMineChatClientConnect(final MineChatClientJoinEvent evt) {
   final Player player = evt.getPlayer();
   final ChatConnection conn = evt.getConnection();
   if(conn.getPhoneType() == PhoneType.IPHONE) {

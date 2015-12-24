@@ -6,8 +6,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import me.xmx.minechatapi.events.EventMineChatClientJoin;
-import me.xmx.minechatapi.events.EventMineChatClientLeave;
+import me.xmx.minechatapi.events.MineChatClientJoinEvent;
+import me.xmx.minechatapi.events.MineChatClientLeaveEvent;
 
 public class Events implements Listener {
 	
@@ -18,14 +18,14 @@ public class Events implements Listener {
 	}
 	
 	@EventHandler
-	public void onMineChatClientJoin(final EventMineChatClientJoin evt) {
+	public void onMineChatClientJoin(final MineChatClientJoinEvent evt) {
 		if(!evt.isCancelled()) {
 			ClientManager.addClient(evt.getPlayer().getUniqueId(), evt.getConnection());
 		}
 	}
 	
 	@EventHandler
-	public void onMineChatClientLeave(final EventMineChatClientLeave evt) {
+	public void onMineChatClientLeave(final MineChatClientLeaveEvent evt) {
 		if(!evt.isCancelled()) {
 			ClientManager.removeClient(evt.getPlayer().getUniqueId(), evt.getConnection());
 		}
@@ -50,7 +50,7 @@ public class Events implements Listener {
 			// The player connected with MineChat
 			final PhoneType type = (message.toLowerCase().contains("iphone")) ? PhoneType.IPHONE : PhoneType.ANDROID;
 			
-			final EventMineChatClientJoin clJoin = new EventMineChatClientJoin(player, new ChatConnection(player, type));
+			final MineChatClientJoinEvent clJoin = new MineChatClientJoinEvent(player, new ChatConnection(player, type));
 			main.getServer().getPluginManager().callEvent(clJoin);
 			if(!main.showConnectionMessage()) {
 				evt.setCancelled(true);
