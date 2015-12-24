@@ -35,7 +35,9 @@ public class Events implements Listener {
 	public void onPlayerLeaveEvent(final PlayerQuitEvent evt) {
 		final Player player = evt.getPlayer();
 		if(ClientManager.usingMineChat(player)) {
-			ClientManager.removeClient(player.getUniqueId(), ClientManager.getConnection(player));
+			final ChatConnection conn = ClientManager.getConnection(player);
+			ClientManager.removeClient(player.getUniqueId(), conn);
+			main.getServer().getPluginManager().callEvent(new EventMineChatClientLeave(player, conn));
 		}
 	}
 	
